@@ -1,1 +1,46 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanessa Harris Final</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class = "wrapper">
+        <header class="header">
+            <h1>Shuttle UM Stop Coverage</h1>
+        </header>
+        <div class="container">
+            <div class="left_section box">
+                <h2>Campus Locations</h2>
+                    <form class="box main_form">
+
+                        <label for="locations">Choose Location</label>
+                        <select name="locations" id="locations">
+                            <option value="ESJ">ESJ</option>
+                            <option value="STAMP">STAMP</option>
+                            <option value="Xfinity Center">Xfinity Center</option>
+                        </select>
+
+                        <label for="times">Choose Time</label>
+                        <select name="times" id="times">
+                            <option value="morning">Morning</option>
+                            <option value="afternoon">Afternoon</option>
+                            <option value="evening">Evening</option>
+                        </select>
+
+                        <button type="button" id="data_load">Load Visual</button>
+                    </form>
+            </div>
+            <div class="right_section box">
+                <h3>Bus List</h3>
+                <ol class="box" id="bus_list">
+                    List of Buses
+                </ol>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
 
