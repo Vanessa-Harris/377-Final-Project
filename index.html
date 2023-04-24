@@ -4,7 +4,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanessa Harris Final</title>
+    <!-- Load my css -->
     <link rel="stylesheet" href="style.css" />
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+
   </head>
   <body>
     <div class = "wrapper">
@@ -35,12 +39,15 @@
             </div>
             <div class="right_section box">
                 <h3>Bus List</h3>
+                <!-- Create a div where the graph will take place -->
+                <div id="my_dataviz"></div>
                 <ol class="box" id="bus_list">
                     List of Buses
                 </ol>
             </div>
         </div>
     </div>
+    <script src="./script.js"></script>
   </body>
 </html>
 
