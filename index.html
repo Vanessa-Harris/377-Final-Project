@@ -7,7 +7,7 @@
     <!-- Load my css -->
     <link rel="stylesheet" href="style.css" />
     <!-- Load d3.js -->
-    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
   </head>
   <body>
@@ -19,7 +19,7 @@
             <div class="left_section box">
                 <h2>Campus Locations</h2>
                     <form class="box main_form">
-
+                        <button type="button" id="data_load">Load Bus Data</button>
                         <label for="locations">Choose Location</label>
                         <select name="locations" id="locations">
                             <option value="ESJ">ESJ</option>
@@ -40,7 +40,7 @@
             <div class="right_section box">
                 <h3>Bus List</h3>
                 <!-- Create a div where the graph will take place -->
-                <div id="my_dataviz"></div>
+                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
                 <ol class="box" id="bus_list">
                     List of Buses
                 </ol>
