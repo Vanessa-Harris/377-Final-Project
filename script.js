@@ -1,3 +1,23 @@
+function injectHTML(list){
+  console.log("fired injectHTML")
+  const target = document.querySelector('#bus_list');
+  target.innerHTML = '';
+  list.array.forEach(element => {
+    const str = `<li>${item.agency}</li>`;
+    target.innerHTML += str;
+  });
+
+}
+function filterList(list, query) {
+  return list.filter((item) => {
+    const lowerCaseName = item.name.toLowerCase(); // PIZZA -> pizza
+    const lowerCaseQuery = query.toLowerCase(); // piZzA -> pizza
+    return lowerCaseName.includes(lowerCaseQuery);
+  });
+}
+function sumAmount (list){
+
+}
 function initBar() {
   window.onload = function () {
     var chart = new CanvasJS.Chart("chartContainer", {
@@ -45,11 +65,21 @@ async function mainEvent() {
     console.log("Loading data"); // this is substituting for a "breakpoint"
 
 
-    const results = await fetch("https://api.umd.io/v1/bus/routes/108/schedules");
+    const environment_result = await fetch("https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json?agency=ENVIRONMENT$where=amount > 100");
+    const police_result = await fetch("https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json?agency=POLICE$where=amount > 100");
+    const fire_result = await fetch("https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json?agency=FIRE/EMS$where=amount > 100");
+    const health_result = await fetch("https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json?agency=HEALTH$where=amount > 100");
+
+
+
 
     // This changes the response from the GET into data we can use - an "object"
-    const storedList = await results.json();
-    console.log(storedList);
+    const environmentList = await environment_result.json();
+    const policeList = await police_result.json();
+    const fireList = await fire_result.json();
+    const healthList = await health_result.json();
+
+    console.log(environmentList);
     //localStorage.setItem('storedData', JSON.stringify(storedList));
 
 
