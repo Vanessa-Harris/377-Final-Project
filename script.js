@@ -8,28 +8,29 @@ function injectHTML(list){
   });
 
 }
-function filterList(list, query) {
-  return list.filter((item) => {
-    const lowerCaseName = item.name.toLowerCase(); // PIZZA -> pizza
-    const lowerCaseQuery = query.toLowerCase(); // piZzA -> pizza
-    return lowerCaseName.includes(lowerCaseQuery);
+function filterList(list, query) { //query = passed in value
+ 
+  return list.filter((item)=> {
+    return item.sum_amount >= query
   });
+  
 }
-function sumAmount (list){
 
-}
-function initBar() {
-  window.onload = function () {
+function initBar(array) {
+  console.log("fired intitBar")
+  console.log("print array: ", array)
+  /* window.onload =*/ function charter () {
     var chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       exportEnabled: true,
       theme: "light1", // "light1", "light2", "dark1", "dark2"
       title: {
-        text: "Simple Column Chart with Index Labels",
+        text: "Spend By Agency",
       },
       axisY: {
         includeZero: true,
       },
+      
       data: [
         {
           type: "column", //change type to bar, line, area, pie, etc
@@ -37,55 +38,86 @@ function initBar() {
           indexLabelFontColor: "#5A5757",
           indexLabelFontSize: 16,
           indexLabelPlacement: "outside",
-          dataPoints: [
+                
+              dataPoints: (array) ,
+              
+              
+             /* dataPoints: [
             { label: "105 Campus Connector", y: 71 },
             { label: "116 Purple", y: 55 },
             { label: "104 College Park Metro", y: 50 },
             { label: "108 Adelphi", y: 65 },
             { label: "115 Organge", y: 92, indexLabel: "\u2605 Highest" },
             { label: "118 Gold", y: 21, indexLabel: "\u2691 Lowest" },
-          ],
+          ] , */   
         },
       ],
+      
     });
     chart.render();
   };
+  return charter();
+  console.log("this is dataPoints: ", Object.values(array))
 
-  
 }
 
 async function mainEvent() {
   const form = document.querySelector(".main_form");
   const loadDataButton = document.querySelector("#data_load");
+  const filterDataButton = document.querySelector("#data_filter");
   
-  const carto = initBar();
-
+  const results = await fetch("https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json?$select=agency,sum(amount)&$group=agency");
+  const currentList = await results.json();
+  
+ 
+  
   loadDataButton.addEventListener("click", async (submitEvent) => {
     // async has to be declared on every function that needs to "await" something
     console.log("Loading data"); // this is substituting for a "breakpoint"
 
-
-    const environment_result = await fetch("https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json?agency=ENVIRONMENT$where=amount > 100");
-    const police_result = await fetch("https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json?agency=POLICE$where=amount > 100");
-    const fire_result = await fetch("https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json?agency=FIRE/EMS$where=amount > 100");
-    const health_result = await fetch("https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json?agency=HEALTH$where=amount > 100");
-
-
-
-
-    // This changes the response from the GET into data we can use - an "object"
-    const environmentList = await environment_result.json();
-    const policeList = await police_result.json();
-    const fireList = await fire_result.json();
-    const healthList = await health_result.json();
-
-    console.log(environmentList);
+    console.table(currentList);
     //localStorage.setItem('storedData', JSON.stringify(storedList));
 
 
    //  console.table(storedList); // this is called "dot notation"
   
 
+  });
+
+  filterDataButton.addEventListener("click", (event) => {
+    console.log("currentlist 1: ", currentList)
+    console.table(currentList)
+    console.log("clicked FilterButton");
+
+    const formData = new FormData(form);
+    const formProps = Object.fromEntries(formData); //short for form properties
+
+    console.log("formProps: ", formProps);
+    console.log("currentlist: ", currentList)
+    //const newList = filterList(currentList, parseInt(formProps.amount));
+    //console.log("return from filterList function: ", filterList(currentList, parseInt(formProps.amount)) )
+    //console.log("new list: ", newList);
+    
+    //const array_newList = Object.values(filterList(currentList, parseInt(formProps.amount)));
+    //const tester_array= Object.values(filterList(currentList, parseInt(formProps.amount)))
+   //console.log("array_newList: ", array_newList)
+    //console.log(typeof array_newList)
+    /* const points = [
+      { label: "105 Campus Connector", y: 71 },
+      { label: "116 Purple", y: 55 },
+      { label: "104 College Park Metro", y: 50 },
+      { label: "108 Adelphi", y: 65 },
+      { label: "115 Organge", y: 92 },
+      { label: "118 Gold", y: 21 }
+        ] */
+    console.log("this is into  initBar: ", Object.values(filterList(currentList, parseInt(formProps.amount))))
+    /*const carto =*/ 
+    initBar(Object.values(filterList(currentList, parseInt(formProps.amount))));
+
+    
+    //console.log(array_newList)
+    // console.log(newList);
+    // injectHTML(newList);
   });
 
   //Problem #1: I need to create a function that finds the frequency of a stop name

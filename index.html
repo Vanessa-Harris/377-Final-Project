@@ -13,36 +13,30 @@
   <body>
     <div class = "wrapper">
         <header class="header">
-            <h1>Shuttle UM Stop Coverage</h1>
+            <h1>PG County Spending 2018</h1>
         </header>
         <div class="container">
             <div class="left_section box">
-                <h2>Campus Locations</h2>
+                <h2>Filter and Load</h2>
                     <form class="box main_form">
-                        <button type="button" id="data_load">Load Bus Data</button>
-                        <label for="locations">Choose Location</label>
-                        <select name="locations" id="locations">
-                            <option value="ESJ">ESJ</option>
-                            <option value="STAMP">STAMP</option>
-                            <option value="Xfinity Center">Xfinity Center</option>
+                        <label for="times">Load Data</label>
+                        <button type="button" id="data_load">Load Data</button>
+                        <label for="locations">Minimum Agency Spend</label>
+                        <select name="amount" id="amount">
+                            <option value= 1000000 > $1,000,000</option>
+                            <option value= 10000000>$10,000,000</option>
+                            <option value= 100000000>$100,000,000</option>
                         </select>
+                        <button type="button" id="data_filter">Filter Data and Load Visual</button>
 
-                        <label for="times">Choose Time</label>
-                        <select name="times" id="times">
-                            <option value="morning">Morning</option>
-                            <option value="afternoon">Afternoon</option>
-                            <option value="evening">Evening</option>
-                        </select>
-
-                        <button type="button" id="data_load">Load Visual</button>
                     </form>
             </div>
             <div class="right_section box">
-                <h3>Bus List</h3>
+                <h3>Total Spend 2018</h3>
                 <!-- Create a div where the graph will take place -->
                 <div id="chartContainer" style="height: 300px; width: 100%;"></div>
                 <ol class="box" id="bus_list">
-                    List of Buses
+                    List of Agencies
                 </ol>
             </div>
         </div>
