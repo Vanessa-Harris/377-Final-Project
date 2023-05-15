@@ -31,7 +31,9 @@ function filterList(list, query) {
 function initBar(array) {
   console.log("fired intitBar");
   console.log("print array: ", array);
-  console.log("values?? : ", Object.values(array));
+  let newArray = array.map(obj => ({ label: obj.agency, y: parseInt(obj.sum_amount) }));
+  //newArray = newArray.map(({x, ...rest}) => rest);
+  console.log("newArrary:", newArray)
   /* window.onload =*/ function charter() {
     var chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
@@ -51,52 +53,10 @@ function initBar(array) {
           indexLabelFontColor: "#5A5757",
           indexLabelFontSize: 16,
           indexLabelPlacement: "outside",
-          indexLabel: "{agency}, {sum_amount}",
 
-          dataPoints: [
-            { label: "MANAGEMENT & BUDGET", y: 11273.38 },
-            {
-              label: "PERMITTING, INSPECTIONS & ENFORCEMENT",
-              y: 6305488.78,
-            },
-            {
-              label: "CITEZEN COMPLIANT OVERSIGHT PANEL",
-              y: 2148.58,
-            },
-            { label: "SOIL CONSERVATION", y: 7239.61 },
-            { label: "HOMELAND SECURITY", y: 14014205.63 },
-            { label: "CENTRAL SERVICES", y: 44508550.50 },
-            { label: "FIRE/EMS", y: 20574216.09 },
-            { label: "REIMBURSABLE BILLINGS", y: 13.76 },
-            { label: "CORRECTIONS", y: 10588944.55 },
-            { label: "FINANCE", y: 1717535.38 },
-            { label: "ORPHAN'S COURT", y: 13354.33 },
-            { label: "HOUSING", y: 2960928.92 },
-            { label: "STATE'S ATTORNEY", y: 632079.01 },
-            {
-              label: "PUBLIC WORKS & TRANSPORTATION",
-              y: "135086757.49",
-            },
-            { label: "COUNTY EXECUTIVE", y: 131404.24 },
-            { label: "NON-DEPARTMENTAL", y: 49196137.10 },
-            { label: "ETHICS & ACCOUNTABILITY", y: 11272.24 },
-            //{ label: "EDUCATION", y: 923984248.31 },
-            { label: "HUMAN RESOURCES", y: 1269930.11 },
-            { label: "PERSONNEL BOARD", y: 3759.65 },
-            { label: "ELECTIONS", y: 268257.82 },
-            { label: "HEALTH", y: 20562452.40 },
-            { label: "ENVIRONMENT", y: 147332773.65 },
-            { label: "CIRCUIT COURT", y: 1792390.20 },
-            { label: "POLICE", y: 19288965.41 },
-            { label: "SOCIAL SERVICES", y: 8409513.65 },
-            { label: "COMMUNITY RELATIONS", y: 99585.55 },
-            { label: "SHERIFF", y: 1133334.99 },
-            { label: "LICENSE COMMISIONERS", y: 21933.13 },
-            { label: "INFORMATION TECHNOLOGY", y: 31901573.39 },
-            { label: "LAW", y: 94426.77 },
-            { label: "COUNTY COUNCIL", y: 2093509.81 },
-            { label: "FAMILY SERVICES", y: 7054452.34 },
-          ],
+          dataPoints: newArray,
+
+
           //[Object.values(array)],
 
           /* dataPoints: [
